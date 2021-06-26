@@ -5,6 +5,7 @@ const path = require('path')
 const paths = require('./paths')
 const chalk = require('react-dev-utils/chalk')
 const resolve = require('resolve')
+const alias = require('./alias')
 
 /**
  * Get additional module paths based on the baseUrl of a compilerOptions object.
@@ -15,7 +16,7 @@ function getAdditionalModulePaths(options = {}) {
   const baseUrl = options.baseUrl
 
   if (!baseUrl) {
-    return ''
+    return { ...alias }
   }
 
   const baseUrlResolved = path.resolve(paths.appPath, baseUrl)
@@ -66,6 +67,7 @@ function getWebpackAliases(options = {}) {
   if (path.relative(paths.appPath, baseUrlResolved) === '') {
     return {
       src: paths.appSrc,
+      ...alias,
     }
   }
 }
