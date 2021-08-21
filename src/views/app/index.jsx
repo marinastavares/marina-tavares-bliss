@@ -7,7 +7,7 @@ const App = ({ children }) => (
   <div className={styles.view}>
     <header className={styles.header}>
       <img className={styles.icon} src={QuestionMark} alt="question mark" aria-hidden />
-      <p className={styles.title}>Questionary</p>
+      <p className={styles.title}>Questions and answers database</p>
     </header>
     <main className={styles.main}>{children}</main>
   </div>

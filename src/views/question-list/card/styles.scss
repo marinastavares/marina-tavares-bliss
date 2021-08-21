@@ -5,7 +5,7 @@
   border: 0.1rem solid $gainsbroro;
   border-radius: 0.4rem;
   display: grid;
-  grid-template-areas: 'image title' 'image published' '. votes';
+  grid-template-areas: 'image title' 'image votes' '. options' '. published';
   grid-template-columns: 4.8rem 1fr;
   column-gap: 1.2rem;
   row-gap: 0.8rem;
@@ -34,6 +34,12 @@
 
   &-published {
     grid-area: published;
+    font-size: 1rem;
+    color: $dimgray;
+  }
+
+  &-options {
+    grid-area: options;
     font-size: 1.2rem;
     color: $dimgray;
   }
