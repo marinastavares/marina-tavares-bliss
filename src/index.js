@@ -7,7 +7,8 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import promise from 'redux-promise-middleware'
 import rootReducer from 'modules/reducer'
-import App from 'views/app'
+
+import Router from './router'
 
 import 'styles/_mixins.scss'
 import 'styles/_colors.scss'
@@ -31,7 +32,7 @@ const store = createStore(
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <Router />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

@@ -4,6 +4,10 @@
   position: relative;
   height: 100vh;
   width: 100vw;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: 'header header header' '. main .';
 
   .icon {
     fill: white;
@@ -18,11 +22,18 @@
     align-items: center;
     justify-content: flex-start;
     background-color: $pink;
+    grid-area: header;
 
     .title {
       margin-left: 0.8rem;
       font-size: 1.8rem;
       color: $white;
     }
+  }
+
+  .main {
+    display: flex;
+    grid-area: main;
+    padding-top: 8rem;
   }
 }
