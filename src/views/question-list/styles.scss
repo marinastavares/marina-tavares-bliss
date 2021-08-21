@@ -1,0 +1,36 @@
+@import 'styles/_colors';
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3.2rem;
+
+  .title {
+    font-size: 2.8rem;
+    text-align: center;
+    color: $blue;
+    margin-bottom: 1.2rem;
+  }
+
+  .input {
+    border: 0.25rem solid $bege;
+    border-radius: 0.8rem;
+    font-size: 1.6rem;
+    color: $dimgray;
+    background: url('../../assets/ic-search.svg') no-repeat scroll 0.4rem 0.6rem;
+    padding: 0.6rem 0.4rem 0.6rem 3.2rem;
+    width: 100%;
+
+    &:focus {
+      border-color: $pink;
+    }
+
+    &::placeholder {
+      font-size: 1.6rem;
+      color: $gainsbroro;
+    }
+  }
+}

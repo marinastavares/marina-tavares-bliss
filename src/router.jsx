@@ -5,7 +5,7 @@ import QuestionList from 'views/question-list'
 const Router = () => (
   <RouterLink>
     <App path="/">
-      <QuestionList path="question" />
+      <QuestionList path="questions" />
     </App>
   </RouterLink>
 )
