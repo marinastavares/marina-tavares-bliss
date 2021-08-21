@@ -1,3 +1,4 @@
+/* stylelint-disable */
 // SOURCE: https://www.boag.online/blog/css-resetA
 
 @import '_colors.scss';
@@ -109,4 +110,11 @@ table {
 input {
   -webkit-appearance: none;
   border-radius: 0;
+  outline: none;
+  font-family: 'Martel Sans', sans-serif;
+}
+
+button {
+  font-family: 'Martel Sans', sans-serif;
+  outline: none;
 }
