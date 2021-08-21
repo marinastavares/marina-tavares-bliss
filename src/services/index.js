@@ -5,7 +5,7 @@ const API_URL = 'https://private-anon-707cfb57a2-blissrecruitmentapi.apiary-mock
 
 axios.defaults.baseURL = API_URL
 
-const camelizeResponse = (response) => humps.camilizeKeys(response.data)
+const camelizeResponse = (response) => response.data
 const handleError = (error) => new Promise((resolve, reject) => reject(error.response.data))
 
 export const get = (request, params) =>

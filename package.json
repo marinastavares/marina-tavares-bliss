@@ -44,6 +44,7 @@
     "humps": "^2.0.1",
     "husky": "^6.0.0",
     "identity-obj-proxy": "3.0.0",
+    "immutable": "^4.0.0-rc.14",
     "jest": "26.6.0",
     "jest-circus": "26.6.0",
     "jest-resolve": "26.6.0",

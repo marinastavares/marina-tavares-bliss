@@ -1,90 +1,20 @@
 import { useState, useCallback, useEffect } from 'react'
 import { useDebounce } from 'use-debounce'
 import { navigate } from '@reach/router'
+import { useDispatch, useSelector } from 'react-redux'
+import { getQuestions } from 'modules/questions/actions'
+import { questionsSelector, getQuestionsLoadingSelector } from 'modules/questions/selectors'
+import LoadingImage from 'assets/loading-questions.png'
 
 import QuestionCard from './card'
 import styles from './styles.scss'
 
-const response = [
-  {
-    id: 1,
-    question: 'Favourite programming language?',
-    imageUrl: 'https://dummyimage.com/600x400/000/fff.png&text=question+1+image+(600x400)',
-    thumbUrl: 'https://dummyimage.com/120x120/000/fff.png&text=question+1+image+(120x120)',
-    publishedAt: '2015-08-05T08:40:51.620Z',
-    choices: [
-      {
-        choice: 'Swift',
-        votes: 2048,
-      },
-      {
-        choice: 'Python',
-        votes: 1024,
-      },
-      {
-        choice: 'Objective-C',
-        votes: 512,
-      },
-      {
-        choice: 'Ruby',
-        votes: 256,
-      },
-    ],
-  },
-  {
-    id: 2,
-    question: 'Favourite programming language?',
-    imageUrl: 'https://dummyimage.com/600x400/000/fff.png&text=question+1+image+(600x400)',
-    thumbUrl: 'https://dummyimage.com/120x120/000/fff.png&text=question+1+image+(120x120)',
-    publishedAt: '2015-08-05T08:40:51.620Z',
-    choices: [
-      {
-        choice: 'Swift',
-        votes: 2048,
-      },
-      {
-        choice: 'Python',
-        votes: 1024,
-      },
-      {
-        choice: 'Objective-C',
-        votes: 512,
-      },
-      {
-        choice: 'Ruby',
-        votes: 256,
-      },
-    ],
-  },
-  {
-    id: 3,
-    question: 'Favourite programming language?',
-    imageUrl: 'https://dummyimage.com/600x400/000/fff.png&text=question+1+image+(600x400)',
-    thumbUrl: 'https://dummyimage.com/120x120/000/fff.png&text=question+1+image+(120x120)',
-    publishedAt: '2015-08-05T08:40:51.620Z',
-    choices: [
-      {
-        choice: 'Swift',
-        votes: 2048,
-      },
-      {
-        choice: 'Python',
-        votes: 1024,
-      },
-      {
-        choice: 'Objective-C',
-        votes: 512,
-      },
-      {
-        choice: 'Ruby',
-        votes: 256,
-      },
-    ],
-  },
-]
-
 const DEBOUNCED_TIME = 1000
+
 const QuestionList = () => {
+  const dispatch = useDispatch()
+  const questions = useSelector(questionsSelector)
+  const isLoading = useSelector(getQuestionsLoadingSelector)
   const [search, setSearch] = useState('')
   const [filter] = useDebounce(search, DEBOUNCED_TIME)
 
@@ -99,6 +29,10 @@ const QuestionList = () => {
     }
   }, [filter])
 
+  useEffect(() => {
+    dispatch(getQuestions())
+  }, [dispatch])
+
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Access different questions from our platform!</h1>
@@ -109,11 +43,23 @@ const QuestionList = () => {
         onChange={handleChange}
         value={search}
       />
-      <div className={styles.cards}>
-        {response.map((question) => (
-          <QuestionCard question={question} key={question.id} />
-        ))}
-      </div>
+      {isLoading ? (
+        <div className={styles.loading}>
+          <img
+            src={LoadingImage}
+            alt="Loading state"
+            aria-hidden
+            className={styles['loading-image']}
+          />
+          <p className={styles['loading-text']}>Loading questions...</p>
+        </div>
+      ) : (
+        <div className={styles.cards}>
+          {questions.map((question) => (
+            <QuestionCard question={question} key={question.id} />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
