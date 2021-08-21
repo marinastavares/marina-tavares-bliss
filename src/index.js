@@ -7,9 +7,10 @@ import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import promise from 'redux-promise-middleware'
 import rootReducer from 'modules/reducer'
+import App from 'views/app'
 
+import 'styles/global.scss'
 import reportWebVitals from './reportWebVitals'
-import App from './App'
 
 const errorMiddleware = () => (next) => (action) => {
   const result = next(action)

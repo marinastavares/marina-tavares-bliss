@@ -11,6 +11,20 @@
     "browser": true,
     "jest": true
   },
+  "settings": {
+    "alias": {
+      "map": [
+        ["modules", "./src/modules/"],
+        ["components", "./src/components/"],
+        ["services", "./src/services/"],
+        ["models", "./src/models/"],
+        ["views", "./src/views/"],
+        ["utils", "./src/utils/"],
+        ["assets", "./src/assets/"],
+        ["styles", "./src/styles/"]
+      ]
+    }
+  },
   "rules": {
     "max-len": ["error", { "code": 100 }],
     "prefer-promise-reject-errors": ["off"],
@@ -22,6 +36,7 @@
     "react-hooks/exhaustive-deps": "warn",
     "sort-imports": ["off"],
     "react/jsx-props-no-spreading": ["off"],
+    "import/no-unresolved": ["off"],
     "no-console": ["error"],
     "import/order": [
       "error",
