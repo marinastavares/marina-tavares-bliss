@@ -1,0 +1,61 @@
+@import 'styles/_colors';
+
+.card {
+  padding: 1.2rem;
+  border: 0.1rem solid $gainsbroro;
+  border-radius: 0.4rem;
+  display: grid;
+  grid-template-areas: 'image title' 'image published' '. votes';
+  grid-template-columns: 4.8rem 1fr;
+  column-gap: 1.2rem;
+  row-gap: 0.8rem;
+  width: 100%;
+  cursor: pointer;
+  text-decoration: none;
+
+  &-image {
+    grid-area: image;
+    object-fit: cover;
+    height: 4.8rem;
+    width: 4.8rem;
+    border-radius: 50%;
+  }
+
+  &-title {
+    grid-area: title;
+    font-size: 1.6rem;
+    color: $gray;
+    line-height: 2rem;
+
+    &:hover {
+      color: $pink;
+    }
+  }
+
+  &-published {
+    grid-area: published;
+    font-size: 1.2rem;
+    color: $dimgray;
+  }
+
+  &-votes {
+    grid-area: votes;
+    display: flex;
+    align-items: baseline;
+
+    .number {
+      font-size: 2.4rem;
+      color: $blue;
+      margin-right: 0.8rem;
+    }
+
+    .number-text {
+      font-size: 1.4rem;
+      color: $gray;
+    }
+  }
+
+  &:hover {
+    box-shadow: rgba(149, 157, 165, 0.2) 0 0.8rem 2.4rem;
+  }
+}
