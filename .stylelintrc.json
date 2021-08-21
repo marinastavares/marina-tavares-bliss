@@ -15,6 +15,6 @@
     "at-rule-no-unknown": null,
     "no-invalid-position-at-import-rule": null,
     "no-irregular-whitespace": null,
-    "unit-allowed-list": ["em", "rem", "%", "vw", "vh", "fr", "auto"]
+    "unit-allowed-list": ["em", "rem", "%", "vw", "vh", "fr", "auto", "deg"]
   }
 }

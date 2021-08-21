@@ -9,9 +9,9 @@ import {
   hasMoreQuestionSelector,
   getMoreQuestionsLoadingSelector,
 } from 'modules/questions/selectors'
-import LoadingImage from 'assets/loading-questions.png'
 import EmptyImage from 'assets/empty-questions.png'
 import Button from 'components/button'
+import Loading from 'components/loading'
 
 import QuestionCard from './card'
 import styles from './styles.scss'
@@ -72,15 +72,7 @@ const QuestionList = () => {
         value={search}
       />
       {isLoading ? (
-        <div className={styles.loading}>
-          <img
-            src={LoadingImage}
-            alt="Loading state"
-            aria-hidden
-            className={styles['loading-image']}
-          />
-          <p className={styles['loading-text']}>Loading questions...</p>
-        </div>
+        <Loading isPlural />
       ) : (
         <div className={styles.cards}>
           {questions.size ? (

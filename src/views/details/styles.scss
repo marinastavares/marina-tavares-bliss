@@ -1,0 +1,65 @@
+@import 'styles/_colors';
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+
+  .header {
+    padding: 1.2rem 1.2rem 1.2rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    &-id {
+      color: $gray;
+      font-size: 1.6rem;
+      line-height: 1;
+      font-weight: bold;
+    }
+
+    .link {
+      height: 3.2rem;
+      width: 3.2rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 1.2rem;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  .main-info {
+    display: grid;
+    grid-template-columns: 30rem 1fr;
+    grid-template-columns: auto auto;
+    gap: 1.2rem;
+    grid-template-areas: 'img title' 'img choices';
+
+    .title {
+      grid-area: title;
+      font-size: 2.4rem;
+      color: $blue;
+    }
+
+    .img {
+      grid-area: img;
+      height: 100%;
+      width: 100%;
+      object-fit: contain;
+      justify-self: flex-start;
+    }
+
+    .choices {
+      grid-area: choices;
+    }
+  }
+}

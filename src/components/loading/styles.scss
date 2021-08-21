@@ -1,0 +1,19 @@
+@import 'styles/_colors';
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 6.4rem auto auto auto;
+
+  &-image {
+    height: 35.2rem;
+    width: 35.2rem;
+  }
+
+  &-text {
+    font-size: 1.8rem;
+    color: $pink;
+  }
+}

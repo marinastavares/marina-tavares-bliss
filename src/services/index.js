@@ -19,3 +19,9 @@ export const post = (request, payload) =>
     .post(request, { ...humps.decamelizeKeys(payload) })
     .then(camelizeResponse)
     .catch(handleError)
+
+export const put = (request, payload) =>
+  axios
+    .put(request, { ...humps.decamelizeKeys(payload) })
+    .then(camelizeResponse)
+    .catch(handleError)

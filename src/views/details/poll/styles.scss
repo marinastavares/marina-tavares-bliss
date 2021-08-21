@@ -1,0 +1,42 @@
+@import 'styles/_colors';
+
+.choices {
+  &-title {
+    font-size: 1.6rem;
+    color: $pink;
+    margin-bottom: 0.8rem;
+  }
+
+  &-intro {
+    font-size: 1.2rem;
+    color: $gray;
+    margin-bottom: 0.8rem;
+  }
+
+  .form {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 100%;
+
+    .checked {
+      border-color: $pink;
+    }
+
+    &-label {
+      width: 100%;
+      border-radius: 0.4rem;
+      border: 0.1rem solid $gainsbroro;
+      padding: 0.8rem;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: $gray;
+    }
+
+    .button {
+      align-self: flex-end;
+    }
+  }
+}
