@@ -1,13 +1,35 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
+import thunk from 'redux-thunk'
+import logger from 'redux-logger'
+import promise from 'redux-promise-middleware'
+import rootReducer from 'modules/reducer'
 
-import './index.css'
-import App from './App'
 import reportWebVitals from './reportWebVitals'
+import App from './App'
+
+const errorMiddleware = () => (next) => (action) => {
+  const result = next(action)
+
+  if (!(result instanceof Promise)) {
+    return action
+  }
+
+  return result.catch(() => {})
+}
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(...[thunk, errorMiddleware, promise], logger)),
+)
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root'),
 )
