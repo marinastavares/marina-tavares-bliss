@@ -9,6 +9,8 @@ import promise from 'redux-promise-middleware'
 import rootReducer from 'modules/reducer'
 import App from 'views/app'
 
+import 'styles/_mixins.scss'
+import 'styles/_colors.scss'
 import 'styles/global.scss'
 import reportWebVitals from './reportWebVitals'
 
