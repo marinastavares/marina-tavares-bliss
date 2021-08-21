@@ -38,6 +38,7 @@ export const updateQuestion = (choice) => (dispatch, getState) => {
   dispatch({
     type: UPDATE_QUESTION.ACTION,
     payload: questionsService.updateQuestion(getState().questions.current)(payload),
+    meta: { payload },
   })
 }
 

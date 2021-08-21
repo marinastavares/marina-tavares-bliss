@@ -1,39 +1,53 @@
 import { useParams, Link } from '@reach/router'
-import { useEffect, useState, useCallback } from 'react'
+import { useEffect, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getQuestion, updateQuestion } from 'modules/questions/actions'
-import {
-  questionSelector,
-  getQuestionLoadingSelector,
-  updateQuestionLoadingSelector,
-} from 'modules/questions/selectors'
+import { getQuestion } from 'modules/questions/actions'
+import { questionSelector, getQuestionLoadingSelector } from 'modules/questions/selectors'
 import Loading from 'components/loading'
 import ArrowIcon from 'assets/ic-arrow.svg'
-import Button from 'components/button'
-import clsx from 'clsx'
+import DonutChart from 'components/donut-chart'
 
 import Poll from './poll'
 import styles from './styles.scss'
 
 const Details = () => {
-  const [selected, setChoice] = useState('')
   const { questionId } = useParams()
   const dispatch = useDispatch()
   const question = useSelector(questionSelector)
   const isLoading = useSelector(getQuestionLoadingSelector)
-  const isUpdatingLoading = useSelector(updateQuestionLoadingSelector)
 
-  const handleInput = useCallback((event) => {
-    const { value } = event.target
-    setChoice(value)
-  }, [])
+  const renderChartData = useMemo(
+    () =>
+      question && [
+        ['choices', 'votes'],
+        ...question.choices.map((values) => [values.choice, values.votes]),
+      ],
+    [question],
+  )
 
-  const handleSubmit = useCallback(
-    (event) => {
-      event.preventDefault()
-      dispatch(updateQuestion(selected))
-    },
-    [dispatch, updateQuestion, selected],
+  const totalVotes = useMemo(
+    () => question && question.choices.reduce((acc, curr) => acc + curr.votes, 0),
+    [question],
+  )
+
+  const showChoices = useMemo(
+    () =>
+      question &&
+      question.choices
+        .sort((choiceA, choiceB) => choiceB.votes - choiceA.votes)
+        .reduce((acc, curr, index) => {
+          if (index === 0) {
+            return `The first place went to ${curr.choice} with ${curr.votes} votes`
+          }
+          if (index === 1) {
+            return `${acc}, followed by ${curr.choice} counting ${curr.votes} votes`
+          }
+          if (index === question.choices.length - 1) {
+            return `${acc}, and for last ${curr.choice} counting ${curr.votes} votes.`
+          }
+          return `${acc}, ${curr.choice} with ${curr.votes} votes`
+        }, ''),
+    [question],
   )
 
   useEffect(() => {
@@ -59,6 +73,26 @@ const Details = () => {
         />
         <h1 className={styles.title}>{question.question}</h1>
         <Poll question={question} className={styles.choices} />
+      </div>
+      <div className={styles.results}>
+        <h2 className={styles['results-title']}>Total votes so far</h2>
+        <p className={styles['results-total']}>
+          For the vote carried out with the proposed question, we had a total of {totalVotes} votes.
+          {showChoices}This poll was publised at{' '}
+          {new Date(question.publishedAt).toLocaleDateString('en-US', {
+            month: 'long',
+            day: '2-digit',
+            year: 'numeric',
+          })}
+          . Below there is a chart for better visualization of the data obtained.
+        </p>
+        <DonutChart
+          title={question.question}
+          className={styles['donut-innertext']}
+          width="400px"
+          height="600px"
+          data={renderChartData}
+        />
       </div>
     </div>
   )
