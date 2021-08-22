@@ -16,7 +16,7 @@ export const get = (request, params) =>
 
 export const post = (request, payload) =>
   axios
-    .post(request, { ...humps.decamelizeKeys(payload) })
+    .post(request, { params: humps.decamelizeKeys(payload) })
     .then(camelizeResponse)
     .catch(handleError)
 

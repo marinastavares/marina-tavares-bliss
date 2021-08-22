@@ -7,6 +7,7 @@ import Loading from 'components/loading'
 import ArrowIcon from 'assets/ic-arrow.svg'
 import DonutChart from 'components/donut-chart'
 import { useWindowSize } from 'utils/hooks'
+import ShareButton from 'components/share-button'
 
 import Poll from './poll'
 import styles from './styles.scss'
@@ -66,6 +67,7 @@ const Details = () => {
           <img src={ArrowIcon} aria-hidden alt="Arrow" className={styles.icon} />
         </Link>
         <p className={styles['header-id']}>Question N#{question?.id}</p>
+        <ShareButton className={styles.share} content={question.question} />
       </div>
       <div className={styles['main-info']}>
         <img

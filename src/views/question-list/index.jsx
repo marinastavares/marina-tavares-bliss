@@ -12,6 +12,8 @@ import {
 import EmptyImage from 'assets/empty-questions.png'
 import Button from 'components/button'
 import Loading from 'components/loading'
+import Input from 'components/input'
+import ShareButton from 'components/share-button'
 
 import QuestionCard from './card'
 import styles from './styles.scss'
@@ -33,6 +35,10 @@ const QuestionList = () => {
   const handleChange = useCallback((event) => {
     const { value } = event.target
     setSearch(value)
+
+    if (!value.length) {
+      navigate(`questions?filter=`)
+    }
   }, [])
 
   const handleMoreQuestions = useCallback(() => {
@@ -63,14 +69,23 @@ const QuestionList = () => {
       <h1 className={styles.title}>
         Access different questions and its anwsers from our platform!
       </h1>
-      <input
-        ref={inputRef}
-        placeholder="Search questions"
-        className={styles.input}
-        type="search"
-        onChange={handleChange}
-        value={search}
-      />
+      <div className={styles['search-bar']}>
+        <Input
+          ref={inputRef}
+          placeholder="Search questions"
+          onChange={handleChange}
+          value={search}
+          isSearchInput
+        />
+        <ShareButton
+          isQuestionList
+          content={`Share the question list ${
+            search && search.length
+              ? `with the filter "${search}" topic`
+              : 'contained on out platform'
+          }`}
+        />
+      </div>
       {isLoading ? (
         <Loading isPlural />
       ) : (
