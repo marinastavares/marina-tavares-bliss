@@ -6,6 +6,10 @@
   flex-direction: column;
   gap: 1.6rem;
 
+  @include mobile {
+    margin-top: 3.2rem;
+  }
+
   .header {
     padding: 1.2rem 1.2rem 1.2rem 0;
     display: flex;

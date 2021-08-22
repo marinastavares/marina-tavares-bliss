@@ -8,7 +8,7 @@ import clsx from 'clsx'
 
 import styles from './styles.scss'
 
-const ShareButton = ({ content, className }) => {
+const ShareButton = ({ content, className, isQuestionList }) => {
   const [isModalOpen, toggleModal] = useToggle()
 
   return (
@@ -28,8 +28,12 @@ const ShareButton = ({ content, className }) => {
       </ReactTooltip>
       {isModalOpen && (
         <ShareModal
-          content={`Share the content regarding the "${content}" with other people,
-        let's battle for the more voted choice`}
+          content={
+            isQuestionList
+              ? content
+              : `Share the content regarding the "${content}" with other people,
+        let's battle for the more voted choice`
+          }
           handleModal={toggleModal}
         />
       )}
@@ -40,10 +44,12 @@ const ShareButton = ({ content, className }) => {
 ShareButton.propTypes = {
   content: PropTypes.string.isRequired,
   className: PropTypes.string,
+  isQuestionList: PropTypes.bool,
 }
 
 ShareButton.defaultProps = {
   className: '',
+  isQuestionList: false,
 }
 
 export default memo(ShareButton)

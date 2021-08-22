@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux'
 import { useCallback, useState, useMemo, memo } from 'react'
 import IconButton from 'assets/ic-close.svg'
 import { useLocation } from '@reach/router'
-import { useOnSuccessCall, useToggle } from 'utils/hooks'
+import { useOnSuccessCall, useToggle, useWindowSize } from 'utils/hooks'
 import { SHARE_CONTENT, shareContent } from 'modules/share/actions'
 
 import Input from '../input'
@@ -25,6 +25,7 @@ const SimpleModal = ({ handleModal, content, ...props }) => {
   const [error, setError] = useState('')
   const [successState, handleSuccess] = useToggle()
   const { href } = useLocation()
+  const { isMobile } = useWindowSize()
 
   const handleSendAgain = useCallback(() => {
     setEmail('')
@@ -63,14 +64,21 @@ const SimpleModal = ({ handleModal, content, ...props }) => {
 
   const modalStyle = useMemo(
     () => ({
-      content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-      },
+      content: isMobile
+        ? {
+            top: '20%',
+            left: '0.8rem',
+            right: '0.8rem',
+            bottom: 'auto',
+          }
+        : {
+            top: '50%',
+            left: '50%',
+            right: 'auto',
+            bottom: 'auto',
+            marginRight: '-50%',
+            transform: 'translate(-50%, -50%)',
+          },
       overlay: {
         backgroundColor: 'rgba(0, 0, 0, 0.6)',
       },

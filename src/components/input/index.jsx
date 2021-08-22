@@ -24,10 +24,13 @@ const Input = forwardRef(({ className, isSearchInput, error, ...props }, ref) =>
 Input.propTypes = {
   className: PropTypes.string,
   isSearchInput: PropTypes.bool,
+  error: PropTypes.string,
 }
+
 Input.defaultProps = {
   isSearchInput: false,
   className: '',
+  error: '',
 }
 
 export default Input

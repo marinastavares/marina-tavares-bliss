@@ -1,9 +1,14 @@
 @import 'styles/_colors';
+@import 'styles/_mixins';
 
 .title-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @include mobile {
+    align-items: flex-start;
+  }
 
   .title {
     font-size: 1.8rem;
@@ -38,6 +43,10 @@
   width: 40rem;
   line-height: 1.5;
   font-size: 1.4rem;
+
+  @include mobile {
+    width: 100%;
+  }
 
   .link {
     color: $pink;
