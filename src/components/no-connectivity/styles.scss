@@ -1,0 +1,32 @@
+@import 'styles/_colors';
+
+.connectivity {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 20;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    padding: 2.4rem;
+    border-radius: 0.8rem;
+    width: 50%;
+    margin: 6.4rem auto;
+
+    .title {
+      font-size: 2.4rem;
+      color: $pink;
+    }
+
+    .subtitle {
+      font-size: 1.6rem;
+      color: $military;
+    }
+  }
+}

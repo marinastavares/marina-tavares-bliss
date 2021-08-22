@@ -69,3 +69,23 @@ export const useWindowSize = () => {
 
   return { ...windowSize, isMobile, isDesktop, isTablet }
 }
+
+// eslint-disable-next-line max-len
+// SOURCE: https://non-traditional.dev/checking-the-network-connection-with-a-react-hook-ec3d8e4de4ec
+
+// Hooks use to guarantee the FREQ-05 requirement
+export const useNetwork = () => {
+  const [isOnline, setNetwork] = useState(window.navigator.onLine)
+  const updateNetwork = () => {
+    setNetwork(window.navigator.onLine)
+  }
+  useEffect(() => {
+    window.addEventListener('offline', updateNetwork)
+    window.addEventListener('online', updateNetwork)
+    return () => {
+      window.removeEventListener('offline', updateNetwork)
+      window.removeEventListener('online', updateNetwork)
+    }
+  })
+  return isOnline
+}
