@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { useSelector } from 'react-redux'
 
 export const useToggle = (initialMode = false) => {
@@ -31,4 +31,41 @@ export const useOnSuccessCall = (action, onSuccess) => {
     }
   })
   return [isLoading, errorMessage]
+}
+
+const MOBILE = 480
+const TABLET = 1024
+
+export const useWindowSize = () => {
+  const isClient = typeof window === 'object'
+
+  const getSize = useCallback(
+    () => ({
+      width: isClient ? window.innerWidth : undefined,
+      height: isClient ? window.innerHeight : undefined,
+    }),
+    [isClient],
+  )
+
+  const [windowSize, setWindowSize] = useState(getSize)
+
+  useEffect(() => {
+    if (!isClient) {
+      return false
+    }
+
+    const handleResize = () => {
+      setWindowSize(getSize())
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [getSize, isClient])
+
+  const isMobile = useMemo(() => windowSize.width < MOBILE, [windowSize.width])
+  const isDesktop = useMemo(() => windowSize.width >= TABLET, [windowSize.width])
+  const isTablet = useMemo(() => !isMobile && !isDesktop, [isDesktop, isMobile])
+
+  return { ...windowSize, isMobile, isDesktop, isTablet }
 }

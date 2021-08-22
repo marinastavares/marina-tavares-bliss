@@ -33,6 +33,10 @@
       font-size: 1.4rem;
       cursor: pointer;
       color: $gray;
+
+      &:hover {
+        border-color: $bege;
+      }
     }
 
     .button {

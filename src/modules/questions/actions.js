@@ -1,6 +1,7 @@
 import { defineAction } from 'redux-define'
 import * as questionsService from 'services/questions'
 
+// eslint-disable-next-line import/no-cycle
 import { questionSelector } from './selectors'
 
 const REQUEST = ['PENDING', 'FULFILLED', 'REJECTED', 'COUNT']

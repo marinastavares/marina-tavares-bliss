@@ -1,4 +1,5 @@
 @import 'styles/_colors';
+@import 'styles/_mixins';
 
 .container {
   display: flex;
@@ -39,10 +40,15 @@
 
   .main-info {
     display: grid;
-    grid-template-columns: 30rem 1fr;
-    grid-template-columns: auto auto;
+    grid-template-columns: minmax(2fr, 60rem) 1fr;
     gap: 1.2rem;
     grid-template-areas: 'title title' 'img choices';
+
+    @include mobile {
+      grid-template-columns: 1fr;
+      gap: 1.2rem;
+      grid-template-areas: 'title' 'img' 'choices';
+    }
 
     .title {
       grid-area: title;

@@ -67,7 +67,7 @@ const QuestionList = () => {
         ref={inputRef}
         placeholder="Search questions"
         className={styles.input}
-        type="text"
+        type="search"
         onChange={handleChange}
         value={search}
       />

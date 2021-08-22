@@ -6,12 +6,14 @@ import { questionSelector, getQuestionLoadingSelector } from 'modules/questions/
 import Loading from 'components/loading'
 import ArrowIcon from 'assets/ic-arrow.svg'
 import DonutChart from 'components/donut-chart'
+import { useWindowSize } from 'utils/hooks'
 
 import Poll from './poll'
 import styles from './styles.scss'
 
 const Details = () => {
   const { questionId } = useParams()
+  const { isMobile } = useWindowSize()
   const dispatch = useDispatch()
   const question = useSelector(questionSelector)
   const isLoading = useSelector(getQuestionLoadingSelector)
@@ -90,7 +92,7 @@ const Details = () => {
           title={question.question}
           className={styles['donut-innertext']}
           width="400px"
-          height="600px"
+          height={isMobile ? '300px' : '600px'}
           data={renderChartData}
         />
       </div>
