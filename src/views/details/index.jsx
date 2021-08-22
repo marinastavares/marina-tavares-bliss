@@ -6,7 +6,8 @@ import { questionSelector, getQuestionLoadingSelector } from 'modules/questions/
 import Loading from 'components/loading'
 import ArrowIcon from 'assets/ic-arrow.svg'
 import DonutChart from 'components/donut-chart'
-import { useWindowSize } from 'utils/hooks'
+import { useWindowSize, useToggle } from 'utils/hooks'
+import ShareModal from 'components/share-modal'
 
 import Poll from './poll'
 import styles from './styles.scss'
@@ -96,6 +97,9 @@ const Details = () => {
           data={renderChartData}
         />
       </div>
+      <ShareModal
+        content={`Share the content regarding the ${question.question} with other people, let's battle for the more voted choice!`}
+      />
     </div>
   )
 }
