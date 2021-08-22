@@ -22,6 +22,7 @@ export const getQuestion = (questionId) => (dispatch) => {
   dispatch({
     type: GET_QUESTION.ACTION,
     payload: questionsService.getQuestion(questionId),
+    meta: { questionId },
   })
 }
 

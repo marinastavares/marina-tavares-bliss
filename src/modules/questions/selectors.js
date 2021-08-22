@@ -1,11 +1,12 @@
-// eslint-disable-next-line import/no-cycle
+import { Question } from 'models/'
+
 import { GET_QUESTIONS, GET_QUESTION, GET_MORE_QUESTIONS, UPDATE_QUESTION } from './actions'
 
 export const questionsSelector = (state) => state.questions.results.valueSeq()
 export const currentQuestionSelector = (state) => state.questions.current
 export const hasMoreQuestionSelector = (state) => state.questions.hasMore
 export const questionSelector = (state) =>
-  state.questions.results.get(currentQuestionSelector(state))
+  state.questions.results.get(currentQuestionSelector(state)) || new Question()
 
 export const getQuestionsLoadingSelector = (state) => !!state.loading[GET_QUESTIONS]
 export const getQuestionLoadingSelector = (state) => !!state.loading[GET_QUESTION]

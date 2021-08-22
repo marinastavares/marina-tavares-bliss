@@ -1,12 +1,12 @@
 import { Record } from 'immutable'
 
 const Question = new Record({
-  id: undefined,
-  question: undefined,
-  publishedAt: undefined,
-  thumbUrl: undefined,
-  imageUrl: undefined,
-  choices: undefined,
+  id: '',
+  question: '',
+  publishedAt: '',
+  thumbUrl: '',
+  imageUrl: '',
+  choices: [],
 })
 
 export default Question

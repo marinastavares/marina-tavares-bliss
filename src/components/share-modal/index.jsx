@@ -114,7 +114,7 @@ const SimpleModal = ({ handleModal, content, ...props }) => {
             {content}. The url{' '}
             <a href={href} className={styles.link} aria-label="Current url">
               {href}
-            </a>
+            </a>{' '}
             will be sent to the contact typed below.
           </p>
           <form onSubmit={handleSubmit} className={styles.form}>

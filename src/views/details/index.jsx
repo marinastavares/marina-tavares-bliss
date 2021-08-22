@@ -1,12 +1,12 @@
-import { useParams, Link } from '@reach/router'
-import { useEffect, useMemo } from 'react'
+import { useParams, Link, navigate } from '@reach/router'
+import { useEffect, useMemo, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getQuestion } from 'modules/questions/actions'
-import { questionSelector, getQuestionLoadingSelector } from 'modules/questions/selectors'
+import { getQuestion, GET_QUESTION } from 'modules/questions/actions'
+import { questionSelector } from 'modules/questions/selectors'
 import Loading from 'components/loading'
 import ArrowIcon from 'assets/ic-arrow.svg'
 import DonutChart from 'components/donut-chart'
-import { useWindowSize } from 'utils/hooks'
+import { useWindowSize, useOnSuccessCall } from 'utils/hooks'
 import ShareButton from 'components/share-button'
 
 import Poll from './poll'
@@ -17,7 +17,6 @@ const Details = () => {
   const { isMobile } = useWindowSize()
   const dispatch = useDispatch()
   const question = useSelector(questionSelector)
-  const isLoading = useSelector(getQuestionLoadingSelector)
 
   const renderChartData = useMemo(
     () =>
@@ -53,9 +52,18 @@ const Details = () => {
     [question],
   )
 
+  // Add redirection if there is no question found for the id
+  const handleUndefined = useCallback(() => {
+    if (question && !question.id) {
+      navigate('/not-found')
+    }
+  }, [question])
+
   useEffect(() => {
     dispatch(getQuestion(questionId))
   }, [questionId, dispatch])
+
+  const [isLoading] = useOnSuccessCall(GET_QUESTION, handleUndefined)
 
   if (isLoading || !(question && question.id)) {
     return <Loading />

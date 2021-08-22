@@ -116,6 +116,7 @@ input {
 
 input[type='radio'] {
   -webkit-appearance: radio;
+  background-color: transparent;
 }
 
 input[type='radio']:after {
