@@ -1,9 +1,11 @@
 import Modal from 'react-modal'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useCallback, useState, useMemo, memo } from 'react'
 import IconButton from 'assets/ic-close.svg'
 import { useLocation } from '@reach/router'
+import { useOnSuccessCall, useToggle } from 'utils/hooks'
+import { SHARE_CONTENT, shareContent } from 'modules/share/actions'
 
 import Input from '../input'
 import Button from '../button'
@@ -21,7 +23,13 @@ const SimpleModal = ({ handleModal, content, ...props }) => {
   const dispatch = useDispatch()
   const [email, setEmail] = useState('')
   const [error, setError] = useState('')
+  const [successState, handleSuccess] = useToggle()
   const { href } = useLocation()
+
+  const handleSendAgain = useCallback(() => {
+    setEmail('')
+    handleSuccess()
+  }, [handleSuccess])
 
   const handleInput = useCallback((event) => {
     const { value } = event.target
@@ -41,9 +49,17 @@ const SimpleModal = ({ handleModal, content, ...props }) => {
     setError('')
   }, [])
 
-  const handleSubmit = useCallback((event) => {
-    event.preventDefault()
-  }, [])
+  const handleSubmit = useCallback(
+    (event) => {
+      event.preventDefault()
+      if (!error) {
+        dispatch(shareContent({ destinationEmail: email, contentUrl: href }))
+      }
+    },
+    [dispatch, email, error, href],
+  )
+
+  const [isLoading] = useOnSuccessCall(SHARE_CONTENT, handleSuccess)
 
   const modalStyle = useMemo(
     () => ({
@@ -78,29 +94,43 @@ const SimpleModal = ({ handleModal, content, ...props }) => {
           <img className={styles.close} src={IconButton} alt="Close icon" aria-hidden />
         </button>
       </div>
-      <p className={styles.info}>
-        {content}. The url{' '}
-        <a href={href} className={styles.link} aria-label="Current url">
-          {href}
-        </a>
-        will be sent to the contact typed below.
-      </p>
-      <form onSubmit={handleSubmit} className={styles.form}>
-        <Input
-          onBlur={handleBlur}
-          value={email}
-          onChange={handleInput}
-          placeholder="Enter a valid email"
-          error={error}
-        />
-        <Button type="submit">Submit</Button>
-      </form>{' '}
+      {successState ? (
+        <>
+          {' '}
+          <p className={styles.info}>Email sent :)</p>{' '}
+          <Button onClick={handleSendAgain}>Send to another contact</Button>
+        </>
+      ) : (
+        <>
+          <p className={styles.info}>
+            {content}. The url{' '}
+            <a href={href} className={styles.link} aria-label="Current url">
+              {href}
+            </a>
+            will be sent to the contact typed below.
+          </p>
+          <form onSubmit={handleSubmit} className={styles.form}>
+            <Input
+              onBlur={handleBlur}
+              value={email}
+              onChange={handleInput}
+              placeholder="Enter a valid email"
+              error={error}
+              disabled={isLoading}
+            />
+            <Button isLoading={isLoading} type="submit">
+              Submit
+            </Button>
+          </form>
+        </>
+      )}
     </Modal>
   )
 }
 
 SimpleModal.propTypes = {
   handleModal: PropTypes.func.isRequired,
+  content: PropTypes.string.isRequired,
 }
 
 export default memo(SimpleModal)

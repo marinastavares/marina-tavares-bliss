@@ -18,6 +18,7 @@ const Details = () => {
   const dispatch = useDispatch()
   const question = useSelector(questionSelector)
   const isLoading = useSelector(getQuestionLoadingSelector)
+  const [isModalOpen, toggleModal] = useToggle()
 
   const renderChartData = useMemo(
     () =>
@@ -97,9 +98,13 @@ const Details = () => {
           data={renderChartData}
         />
       </div>
-      <ShareModal
-        content={`Share the content regarding the ${question.question} with other people, let's battle for the more voted choice!`}
-      />
+      {isModalOpen && (
+        <ShareModal
+          content={`Share the content regarding the "${question.question}" with other people,
+        let's battle for the more voted choice`}
+          handleModal={toggleModal}
+        />
+      )}
     </div>
   )
 }
