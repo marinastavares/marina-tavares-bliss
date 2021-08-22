@@ -2,7 +2,9 @@
 @import 'styles/_mixins';
 
 .container {
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, auto);
   flex-direction: column;
   gap: 1.6rem;
 
@@ -56,6 +58,7 @@
       grid-template-columns: 1fr;
       gap: 1.2rem;
       grid-template-areas: 'title' 'img' 'choices';
+      align-items: flex-start;
     }
 
     .title {
@@ -71,6 +74,11 @@
       width: 100%;
       object-fit: cover;
       justify-self: flex-start;
+
+      @include mobile {
+        max-height: 20rem;
+        width: 100%;
+      }
     }
 
     .choices {

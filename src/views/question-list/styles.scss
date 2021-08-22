@@ -27,6 +27,10 @@
     grid-template-columns: 1fr 2.4rem;
     align-items: center;
     gap: 1.2rem;
+
+    @include mobile {
+      gap: 0.8rem;
+    }
   }
 
   .cards {
