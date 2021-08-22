@@ -45,3 +45,17 @@
     padding-top: 8rem;
   }
 }
+
+.retry {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 6.4rem;
+
+  &-title {
+    color: $pink;
+    font-size: 2.4rem;
+    margin-bottom: 2.4rem;
+  }
+}
