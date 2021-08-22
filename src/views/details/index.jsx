@@ -6,8 +6,8 @@ import { questionSelector, getQuestionLoadingSelector } from 'modules/questions/
 import Loading from 'components/loading'
 import ArrowIcon from 'assets/ic-arrow.svg'
 import DonutChart from 'components/donut-chart'
-import { useWindowSize, useToggle } from 'utils/hooks'
-import ShareModal from 'components/share-modal'
+import { useWindowSize } from 'utils/hooks'
+import ShareButton from 'components/share-button'
 
 import Poll from './poll'
 import styles from './styles.scss'
@@ -18,7 +18,6 @@ const Details = () => {
   const dispatch = useDispatch()
   const question = useSelector(questionSelector)
   const isLoading = useSelector(getQuestionLoadingSelector)
-  const [isModalOpen, toggleModal] = useToggle()
 
   const renderChartData = useMemo(
     () =>
@@ -68,6 +67,7 @@ const Details = () => {
           <img src={ArrowIcon} aria-hidden alt="Arrow" className={styles.icon} />
         </Link>
         <p className={styles['header-id']}>Question N#{question?.id}</p>
+        <ShareButton className={styles.share} content={question.question} />
       </div>
       <div className={styles['main-info']}>
         <img
@@ -98,13 +98,6 @@ const Details = () => {
           data={renderChartData}
         />
       </div>
-      {isModalOpen && (
-        <ShareModal
-          content={`Share the content regarding the "${question.question}" with other people,
-        let's battle for the more voted choice`}
-          handleModal={toggleModal}
-        />
-      )}
     </div>
   )
 }

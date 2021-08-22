@@ -1,0 +1,17 @@
+@import 'styles/_colors';
+
+.button {
+  height: 3.2rem;
+  width: 3.2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  background-color: transparent;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+}
