@@ -65,3 +65,7 @@ $ serve -s build
 ## Production link
 
 [https://marina-tavares-bliss.netlify.app/](https://marina-tavares-bliss.netlify.app/)
+
+## Images Resources
+
+<a href="https://storyset.com/web">Web illustrations by Storyset</a>
