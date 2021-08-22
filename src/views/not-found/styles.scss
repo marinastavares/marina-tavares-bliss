@@ -1,0 +1,25 @@
+@import 'styles/_colors';
+@import 'styles/_mixins';
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: center;
+  margin: auto 10rem;
+
+  @include mobile {
+    margin: auto 1.8rem;
+  }
+
+  .image {
+    height: 40rem;
+    width: 40rem;
+    margin: 6.4rem auto auto auto;
+
+    @include mobile {
+      height: 20rem;
+      width: 20rem;
+    }
+  }
+}

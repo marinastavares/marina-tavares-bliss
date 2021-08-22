@@ -15,7 +15,8 @@
   }
 
   .icon {
-    fill: white;
+    height: 3.4rem;
+    width: 3.4rem;
   }
 
   .header {
@@ -36,6 +37,11 @@
       color: $white;
       font-weight: bold;
       line-height: 1.2;
+      text-decoration: none;
+
+      @include mobile {
+        font-size: 1.4rem;
+      }
     }
   }
 

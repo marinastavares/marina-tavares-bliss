@@ -9,6 +9,8 @@ import NoConnectivity from 'components/no-connectivity'
 import Button from 'components/button'
 import { useNetwork } from 'utils/hooks'
 import clsx from 'clsx'
+import { Link } from '@reach/router'
+import Favicon from 'assets/question.png'
 
 import styles from './styles.scss'
 
@@ -45,8 +47,12 @@ const App = ({ children }) => {
       {!isOnline && <NoConnectivity />}
       <div className={clsx(styles.view, { [styles.offline]: !isOnline })}>
         <header className={styles.header}>
-          <img className={styles.icon} src={QuestionMark} alt="question mark" aria-hidden />
-          <p className={styles.title}>Questions and answers database</p>
+          <Link to="/questions">
+            <img className={styles.icon} src={Favicon} alt="question mark" aria-hidden />
+          </Link>
+          <Link to="/questions" className={styles.title}>
+            Questions and answers database
+          </Link>
         </header>
         <main className={styles.main}>{children}</main>
       </div>

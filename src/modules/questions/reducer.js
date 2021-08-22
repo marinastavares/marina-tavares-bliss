@@ -17,10 +17,10 @@ const orderedQuestions = (payload) =>
 const questions = createReducer(INITIAL_STATE, {
   [GET_QUESTIONS.FULFILLED]: (state, { payload }) =>
     state.set('results', orderedQuestions(payload)),
-  [GET_QUESTION.FULFILLED]: (state, { payload }) =>
+  [GET_QUESTION.FULFILLED]: (state, { payload, meta: { questionId } }) =>
     state
-      .setIn(['results', payload.id], new Question(humps.camelizeKeys(payload)))
-      .set('current', payload.id),
+      .setIn(['results', Number(questionId)], new Question(humps.camelizeKeys(payload)))
+      .set('current', Number(questionId)),
   [UPDATE_QUESTION.FULFILLED]: (state, { meta: { payload } }) =>
     state.setIn(['results', payload.id], new Question(humps.camelizeKeys(payload))),
   [GET_MORE_QUESTIONS.FULFILLED]: (state, { payload }) => {
