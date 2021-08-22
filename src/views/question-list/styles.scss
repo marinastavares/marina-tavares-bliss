@@ -54,24 +54,6 @@
     }
   }
 
-  .loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 6.4rem;
-
-    &-image {
-      height: 35.2rem;
-      width: 35.2rem;
-    }
-
-    &-text {
-      font-size: 1.8rem;
-      color: $pink;
-    }
-  }
-
   .button {
     margin-top: 3.2rem;
   }

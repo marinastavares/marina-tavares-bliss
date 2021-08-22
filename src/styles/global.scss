@@ -114,6 +114,38 @@ input {
   font-family: 'Martel Sans', sans-serif;
 }
 
+input[type='radio'] {
+  -webkit-appearance: radio;
+}
+
+input[type='radio']:after {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 1.6rem;
+  top: -0.2rem;
+  left: -0.1rem;
+  position: relative;
+  background-color: $gainsbroro;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 0.2rem solid white;
+}
+
+input[type='radio']:checked:after {
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 1.6rem;
+  top: -0.2rem;
+  left: -0.1rem;
+  position: relative;
+  background-color: $pink;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 0.2rem solid white;
+}
+
 button {
   font-family: 'Martel Sans', sans-serif;
   outline: none;
